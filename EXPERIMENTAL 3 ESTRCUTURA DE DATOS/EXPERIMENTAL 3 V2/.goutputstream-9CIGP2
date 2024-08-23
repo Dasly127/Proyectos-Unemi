@@ -1,0 +1,63 @@
+
+
+class PILAS_NUM:
+    def __init__(self):
+        self.pila1 = []
+        self.pila2 = []
+        self.pila_intercalada = []
+        self.pila_suma = []
+
+    def llenar_pilas(self):
+        # Llenar la pila1 con 5 elementos numéricos
+        self.pila1 = [int(input(f"Ingresa el elemento {i+1} para la pila 1: ")) for i in range(5)]
+        
+        # Llenar la pila2 con 7 elementos numéricos
+        self.pila2 = [int(input(f"Ingresa el elemento {i+1} para la pila 2: ")) for i in range(7)]
+
+    def intercalar_pilas(self):
+        self.pila_intercalada = []
+        # Determinar la pila con mayor número de elementos
+        if len(self.pila2) > len(self.pila1):
+            pila_mayor = self.pila2
+            pila_menor = self.pila1
+        else:
+            pila_mayor = self.pila1
+            pila_menor = self.pila2
+
+        # Intercalar elementos
+        for i in range(len(pila_menor)):
+            self.pila_intercalada.append(pila_mayor[i])
+            self.pila_intercalada.append(pila_menor[i])
+        
+        # Añadir los elementos sobrantes
+        self.pila_intercalada.extend(pila_mayor[len(pila_menor):])
+        
+        print("Pila 1 original:", self.pila1)
+        print("Pila 2 original:", self.pila2)
+        print("Pila intercalada:", self.pila_intercalada)
+
+    def sumar_pilas(self):
+        self.pila_suma = []
+        min_len = min(len(self.pila1), len(self.pila2))
+        
+        # Sumar elementos hasta el tamaño de la pila más pequeña
+        for i in range(min_len):
+            self.pila_suma.append(self.pila1[i] + self.pila2[i])
+        
+        # Añadir los elementos sobrantes de la pila más grande
+        if len(self.pila1) > min_len:
+            self.pila_suma.extend(self.pila1[min_len:])
+        else:
+            self.pila_suma.extend(self.pila2[min_len:])
+        
+        print("Pila 1 original:", self.pila1)
+        print("Pila 2 original:", self.pila2)
+        print("PILAS SUMADAS:", self.pila_suma)
+
+    def mostrar_pilas(self):
+        print("Pila 1:", self.pila1)
+        print("Pila 2:", self.pila2)
+        if self.pila_intercalada:
+            print("Pila intercalada:", self.pila_intercalada)
+        if self.pila_suma:
+            print("Pila suma:", self.pila_suma)
