@@ -36,19 +36,6 @@ class Estudiante:
         self.apellido = apellido
         self.estado = estado
 
-
-def obtener_id_estudiante():
-    """
-    Obtiene el ID del estudiante ingresado por el usuario.
-    """
-    while True:
-        id_estudiante = input("Ingrese el ID del estudiante: ")
-        if id_estudiante.isdigit():
-            return int(id_estudiante)
-        else:
-            print("Error: El ID debe ser un número entero.")
-
-
 class MatrizEstudiantes:
     
     #Creamos la clase para gestionar una lista de estudiantes.
@@ -87,7 +74,7 @@ class MatrizEstudiantes:
             print("No hay estudiantes registrados.")
             return
 
-        id_modificar = obtener_id_estudiante()
+        id_modificar = self.obtener_id_estudiante()
         if id_modificar in self.estudiantes:
             estudiante = self.estudiantes[id_modificar]
             estudiante.nombres = input("Ingrese el nuevo nombre del estudiante: ").upper()
@@ -104,7 +91,7 @@ class MatrizEstudiantes:
             print("No hay estudiantes registrados.")
             return
 
-        id_cambiar = obtener_id_estudiante()
+        id_cambiar = self.obtener_id_estudiante()
         if id_cambiar in self.estudiantes:
             estudiante = self.estudiantes[id_cambiar]
             estudiante.estado = "I" if estudiante.estado == "A" else "A"
@@ -137,6 +124,16 @@ class MatrizEstudiantes:
             else:
                 print("Error: El estado debe ser 'A' o 'I'")
 
+    def obtener_id_estudiante(self):
+        """
+        Obtiene el ID del estudiante ingresado por el usuario.
+        """
+        while True:
+            id_estudiante = input("Ingrese el ID del estudiante: ")
+            if id_estudiante.isdigit():
+                return int(id_estudiante)
+            else:
+                print("Error: El ID debe ser un número entero.")
 
 # Función para mostrar el menú y manejar las opciones
 def mostrar_menu():

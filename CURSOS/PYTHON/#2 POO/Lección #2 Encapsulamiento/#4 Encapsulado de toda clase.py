@@ -43,3 +43,4 @@ persona1.mostrar_detalle()
 
 # persona1._nombre = 'Cambio'
 # print(persona1._nombre)
+

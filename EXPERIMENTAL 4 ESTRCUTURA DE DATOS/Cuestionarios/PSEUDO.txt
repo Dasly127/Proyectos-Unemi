@@ -1,0 +1,82 @@
+Clase Estudiante:
+    // Atributos de la clase
+    Atributo id
+    Atributo nombre
+    Atributo apellido
+    Atributo estado
+    
+    // Constructor de la clase
+    Método Constructor(id, nombre, apellido, estado):
+        Este.id = id
+        Este.nombre = nombre
+        Este.apellido = apellido
+        Este.estado = estado
+
+    // Método para modificar el nombre del estudiante
+    Método modificar_nombre(nuevo_nombre):
+        Este.nombre = nuevo_nombre
+
+    // Método para modificar el apellido del estudiante
+    Método modificar_apellido(nuevo_apellido):
+        Este.apellido = nuevo_apellido
+
+    // Método para activar o desactivar el estudiante
+    Método cambiar_estado():
+        Si Este.estado == "A" Entonces
+            Este.estado = "I"
+        Sino
+            Este.estado = "A"
+
+// Función principal
+Función principal():
+    // Lista para almacenar los estudiantes
+    estudiantes = []
+
+    // Ingresar datos de 5 estudiantes
+    Para i = 1 Hasta 5 Hacer
+        nombre = PedirTexto("Ingrese el nombre del estudiante " + ConvertirTexto(i) + ": ")
+        apellido = PedirTexto("Ingrese el apellido del estudiante " + ConvertirTexto(i) + ": ")
+        estado = PedirTexto("Ingrese el estado del estudiante (A para Activo, I para Inactivo): ")
+        
+        // Crear un nuevo estudiante y agregarlo a la lista
+        estudiante = Nuevo Estudiante(i, nombre, apellido, estado)
+        AgregarALista(estudiantes, estudiante)
+    Fin Para
+
+    // Modificar datos del estudiante
+    id_modificar = PedirEntero("Ingrese el ID del estudiante que desea modificar: ")
+    estudiante_modificar = BuscarEnLista(estudiantes, id_modificar)
+
+    Si estudiante_modificar No Es Nulo Entonces
+        nuevo_nombre = PedirTexto("Ingrese el nuevo nombre: ")
+        nuevo_apellido = PedirTexto("Ingrese el nuevo apellido: ")
+        
+        estudiante_modificar.modificar_nombre(nuevo_nombre)
+        estudiante_modificar.modificar_apellido(nuevo_apellido)
+        MostrarMensaje("Datos modificados correctamente")
+    Sino
+        MostrarMensaje("Estudiante no encontrado")
+    Fin Si
+
+    // Activar o eliminar estudiante
+    id_cambiar_estado = PedirEntero("Ingrese el ID del estudiante que desea activar/desactivar: ")
+    estudiante_cambiar_estado = BuscarEnLista(estudiantes, id_cambiar_estado)
+    
+    Si estudiante_cambiar_estado No Es Nulo Entonces
+        estudiante_cambiar_estado.cambiar_estado()
+        MostrarMensaje("Estado del estudiante cambiado correctamente")
+    Sino
+        MostrarMensaje("Estudiante no encontrado")
+    Fin Si
+
+// Función para buscar un estudiante en la lista por su ID
+Función BuscarEnLista(lista, id):
+    Para cada elemento en lista Hacer
+        Si elemento.id == id Entonces
+            Retornar elemento
+        Fin Si
+    Fin Para
+    Retornar Nulo
+
+// Iniciar el programa
+principal()
