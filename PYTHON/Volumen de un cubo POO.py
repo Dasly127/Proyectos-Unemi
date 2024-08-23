@@ -22,7 +22,7 @@ class Cubo:
         return self.anchura * self.profundidad * self.altura
 
 #Pedimos datos al Usuario
-anchura = float(input("Ingrese la anchura del cubo: "))
+anchura = float(input("Ingrese la aanchura del cubo: "))
 profundidad = float(input("Ingrese la profundidad del cubo: "))
 altura = float(input("Ingrese la altura del cubo: "))
 
@@ -34,6 +34,7 @@ volumen = cubo.CalcularVolumen()
 
 #Mostramos el resultado
 print("El volumen del cubo es:", volumen)
+
 
 
 

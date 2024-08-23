@@ -1,6 +1,6 @@
 
 
-# Archivo Persona.py
+
 class Persona:
     # Definimos parámetros
     def __init__(self, nombre, apellido, edad):
@@ -37,9 +37,7 @@ class Persona:
     def mostrarDetalle(self):
         print(f"Persona: {self._nombre} {self._apellido} {self._edad}")
 
-if __name__ == "__main__":
-    persona1 = Persona("Juan", "Perez", 28)
-    persona1.nombre = "Juan Carlos"
-    persona1.apellido = "Lara"
-    persona1.edad = 30 
-    persona1.mostrarDetalle()
+# Para llamar el objeto 
+persona1 = Persona("Juan", "Perez", 28)
+persona1.nombre = "Juan Carlos"
+print(persona1.nombre)
