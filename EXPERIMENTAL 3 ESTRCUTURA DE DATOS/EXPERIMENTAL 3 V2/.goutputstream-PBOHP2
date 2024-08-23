@@ -1,0 +1,30 @@
+
+
+from pilas_num import PILAS_NUM
+
+def main():
+    pilas = PILAS_NUM()
+    pilas.llenar_pilas()
+    
+    while True:
+        print("\nMenú de Opciones:")
+        print("1. ···Intercalar pilas···")
+        print("2. ··· Sumar pilas···")
+        print("3. ···Mostrar pilas···")
+        print("4. ···Salir del programa y finalizar···")
+        
+        opcion = int(input("Elige una opción: "))
+        
+        if opcion == 1:
+            pilas.intercalar_pilas()
+        elif opcion == 2:
+            pilas.sumar_pilas()
+        elif opcion == 3:
+            pilas.mostrar_pilas()
+        elif opcion == 4:
+            break
+        else:
+            print("Opción no válida, intenta de nuevo.")
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,69 @@
+'''
+La programación orientada a objetos (POO) es un paradigma de programación que organiza el código en torno a objetos.
+Un objeto es una entidad que tiene estados y comportamientos. 
+Los estados son las características de un objeto, como su color, su tamaño o su velocidad. 
+Los comportamientos son las acciones que un objeto puede realizar, como moverse, hablar o calcular.
+
+En Python, una clase es un molde que se utiliza para crear objetos. 
+Una clase define los estados y comportamientos de un objeto. 
+Para crear un objeto, se usa la palabra clave new().
+
+Por ejemplo, la siguiente clase define un objeto Coche:
+'''
+class Coche:
+    def __init__(self, color, marca, modelo):
+        self.color = color
+        self.marca = marca
+        self.modelo = modelo
+
+    def acelerar(self):
+        print("El coche acelera")
+
+    def frenar(self):
+        print("El coche frena")
+
+'''
+Esta clase tiene tres estados: el color, la marca y el modelo del coche. 
+También tiene dos comportamientos: acelerar y frenar.
+
+Para crear un objeto Coche, se usa la siguiente instrucción:
+'''
+
+coche = Coche("rojo", "Ford", "Focus")
+
+'''
+Esta instrucción crea un objeto Coche con los siguientes valores:
+
+Color: rojo
+Marca: Ford
+Modelo: Focus
+
+Ahora, podemos usar el objeto coche para llamar a sus métodos. 
+Por ejemplo, la siguiente instrucción imprime el siguiente mensaje:
+'''
+
+coche.acelerar()
+
+'''
+La POO ofrece varios beneficios, como:
+
+Reutilización de código: 
+La POO permite reutilizar el código de las clases existentes para crear nuevas clases.
+Abstracción: La POO permite ocultar los detalles de implementación de las clases, 
+lo que hace que el código sea más fácil de entender y de mantener.
+
+Encapsulamiento: 
+La POO permite agrupar los datos y los comportamientos de un objeto juntos, 
+lo que hace que el código sea más organizado y eficiente.
+
+Si estás empezando a aprender POO, es importante centrarse en los conceptos básicos,
+como clases, objetos, estados y comportamientos. Una vez que entiendas estos conceptos, 
+podrás empezar a aprovechar los beneficios de la POO para crear código más eficiente y reutilizable.
+
+Aquí tienes una forma fácil y resumida de entender POO en Python:
+
+Clases: Las clases son moldes que se utilizan para crear objetos.
+Objetos: Los objetos son entidades que tienen estados y comportamientos.
+Estados: Los estados son las características de un objeto, como su color, su tamaño o su velocidad.
+Comportamientos: Los comportamientos son las acciones que un objeto puede realizar, como moverse, hablar
+'''
