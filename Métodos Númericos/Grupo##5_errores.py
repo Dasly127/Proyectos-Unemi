@@ -4,7 +4,7 @@ import math  # Importamos la librería Math de Python
 
 def calcular_errores(valor_real, valor_estimado):
     """
-    Calcula el error absoluto y relativo entre un valor real y un valor estimado.
+    Calculamos el error absoluto y relativo entre un valor real y un valor estimado.
     
     :param valor_real: Valor verdadero de la magnitud
     :param valor_estimado: Valor estimado o aproximado
