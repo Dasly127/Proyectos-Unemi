@@ -1,64 +1,67 @@
 
-
 import sympy as sp
-import numpy as np
-import matplotlib.pyplot as plt
 
-# Definir la variable y la función
+def taylor_series(function, var, point, order):
+    """
+    Calcula la Serie de Taylor de una función dada alrededor de un punto hasta un cierto orden.
+    
+    :param function: La función simbólica de SymPy.
+    :param var: La variable simbólica de SymPy.
+    :param point: El punto alrededor del cual se expande la serie (por ejemplo, 0).
+    :param order: El orden hasta el cual expandir la serie.
+    :return: La Serie de Taylor truncada.
+    """
+    taylor_expansion = sp.series(function, var, point, order).removeO()  # Quita el término de orden superior (O)
+    return taylor_expansion
+
+def truncation_error(function, var, point, order, eval_point):
+    """
+    Calcula el error de truncamiento al truncar la Serie de Taylor en un cierto orden.
+    
+    :param function: La función simbólica de SymPy.
+    :param var: La variable simbólica de SymPy.
+    :param point: El punto alrededor del cual se expande la serie.
+    :param order: El orden en el cual se truncó la serie.
+    :param eval_point: El punto en el cual se evalúa el error.
+    :return: El error de truncamiento evaluado en el punto dado.
+    """
+    # Expansión de Taylor truncada
+    taylor_truncated = taylor_series(function, var, point, order)
+    
+    # Calcular el término de error (f(x) - Serie de Taylor truncada)
+    error_term = function - taylor_truncated
+    error_evaluated = error_term.subs(var, eval_point)
+    
+    return error_evaluated
+
+# Definir la variable simbólica
 x = sp.symbols('x')
+
+# Función 1: f(x) = e^x
 f_exp = sp.exp(x)
 
-# Serie de Taylor hasta el orden 4 en el punto a = 0
-serie_taylor_exp = sp.series(f_exp, x, 0, 5)  # 5 para incluir términos hasta x^4
-print("Serie de Taylor de e^x hasta el orden 4:")
-print(serie_taylor_exp)
+# Función 2: f(x) = sin(x)
+f_sin = sp.sin(x)
 
-# Definir la función original y las aproximaciones
-f_original = np.exp
-f_approx_1 = lambda x: 1 + x
-f_approx_2 = lambda x: 1 + x + x**2 / 2
-f_approx_3 = lambda x: 1 + x + x**2 / 2 + x**3 / 6
-f_approx_4 = lambda x: 1 + x + x**2 / 2 + x**3 / 6 + x**4 / 24
+# Función 3: f(x) = ln(1 + x)
+f_ln = sp.ln(1 + x)
 
-# Rango de valores para x
-x_vals = np.linspace(-2, 2, 400)
-y_original = f_original(x_vals)
-y_approx_1 = f_approx_1(x_vals)
-y_approx_2 = f_approx_2(x_vals)
-y_approx_3 = f_approx_3(x_vals)
-y_approx_4 = f_approx_4(x_vals)
+# Calcular la Serie de Taylor y el error de truncamiento para cada función
 
-# Graficar las aproximaciones
-plt.figure(figsize=(10, 6))
-plt.plot(x_vals, y_original, label='f(x) = e^x', color='black')
-plt.plot(x_vals, y_approx_1, label='Aprox. 1er orden', linestyle='dashed')
-plt.plot(x_vals, y_approx_2, label='Aprox. 2do orden', linestyle='dotted')
-plt.plot(x_vals, y_approx_3, label='Aprox. 3er orden', linestyle='dashdot')
-plt.plot(x_vals, y_approx_4, label='Aprox. 4to orden', linestyle='solid')
+# 1. f(x) = e^x
+taylor_exp_exp = taylor_series(f_exp, x, 0, 2)
+error_exp = truncation_error(f_exp, x, 0, 2, 0.1)
+print(f"Serie de Taylor truncada de e^x (hasta x^1): {taylor_exp_exp}")
+print(f"Error de truncamiento en e^x para x=0.1: {error_exp.evalf()}")
 
-plt.legend()
-plt.xlabel('x')
-plt.ylabel('f(x)')
-plt.title('Expansión en Serie de Taylor de f(x) = e^x')
-plt.grid(True)
-plt.show()
+# 2. f(x) = sin(x)
+taylor_exp_sin = taylor_series(f_sin, x, 0, 2)
+error_sin = truncation_error(f_sin, x, 0, 2, 0.1)
+print(f"Serie de Taylor truncada de sin(x) (hasta x^1): {taylor_exp_sin}")
+print(f"Error de truncamiento en sin(x) para x=0.1: {error_sin.evalf()}")
 
-# Cálculo del error de truncamiento
-error_1 = np.abs(y_original - y_approx_1)
-error_2 = np.abs(y_original - y_approx_2)
-error_3 = np.abs(y_original - y_approx_3)
-error_4 = np.abs(y_original - y_approx_4)
-
-# Graficar los errores
-plt.figure(figsize=(10, 6))
-plt.plot(x_vals, error_1, label='Error 1er orden')
-plt.plot(x_vals, error_2, label='Error 2do orden')
-plt.plot(x_vals, error_3, label='Error 3er orden')
-plt.plot(x_vals, error_4, label='Error 4to orden')
-
-plt.legend()
-plt.xlabel('x')
-plt.ylabel('Error de truncamiento')
-plt.title('Error de truncamiento en la Serie de Taylor de f(x) = e^x')
-plt.grid(True)
-plt.show()
+# 3. f(x) = ln(1 + x)
+taylor_exp_ln = taylor_series(f_ln, x, 0, 2)
+error_ln = truncation_error(f_ln, x, 0, 2, 0.1)
+print(f"Serie de Taylor truncada de ln(1+x) (hasta x^1): {taylor_exp_ln}")
+print(f"Error de truncamiento en ln(1+x) para x=0.1: {error_ln.evalf()}")
