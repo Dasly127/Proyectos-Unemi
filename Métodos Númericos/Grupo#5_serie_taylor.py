@@ -1,26 +1,56 @@
 
 
-
+'''
+Usamos SymPy, una librería en Python que nos permite hacer cálculos simbólicos, 
+lo que es ideal para trabajar con expansiones de Taylor.
+'''
 import sympy as sp
 
-# Definir la variable simbólica
+'''
+Definimos una variable simbólica x usando sp.symbols(). 
+Esta variable representará el valor de x que vamos a utilizar 
+en nuestras funciones y series.
+'''
 x = sp.symbols('x')
 
-# Definir la función f(x) = e^x
+
+
+'''
+Definimos la Función f(x) de manera simbólica utilizando
+sp.exp(x) que nos ayuda a crear una representación de la función
+exponencial
+'''
 f_exp = sp.exp(x)
 
-# Función para calcular la Serie de Taylor
+
+
+'''
+Esta función toma como entrada una función, una variable, 
+un punto de expansión y el orden de la serie de Taylor.
+Usa sp.series() para calcular la serie de Taylor de la función alrededor 
+del punto especificado y devuelve la serie sin el término de orden superior.
+'''
 def serie_de_taylor(funcion, variable, punto, orden):
     return sp.series(funcion, variable, punto, orden).removeO()
 
-# Función para calcular el error de truncamiento
+
+
+'''
+Esta función calcula el error de truncamiento, que es la diferencia entre la función original 
+y su aproximación por la serie de Taylor.
+Evalúa este error en un punto específico dado por punto_evaluacion.
+'''
 def error_de_truncamiento(funcion, variable, punto, orden, punto_evaluacion):
     taylor_truncada = serie_de_taylor(funcion, variable, punto, orden)
     termino_error = funcion - taylor_truncada
     error_evaluado = termino_error.subs(variable, punto_evaluacion)
     return error_evaluado
 
-# Calcular la Serie de Taylor de e^x alrededor de 0 hasta el orden 4
+
+
+'''
+
+'''
 ordenes = [2, 3, 4, 5]
 expansiones_taylor = [serie_de_taylor(f_exp, x, 0, orden) for orden in ordenes]
 
