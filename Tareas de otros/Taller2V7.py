@@ -11,13 +11,16 @@ class ListaEnlazada:
     def __init__(self):
         self.cabeza = None
 
-    # Método para validar el estado
+    # Método para validar el estado (acepta en cualquier formato, pero almacena en mayúsculas)
     def validar_estado(self, estado):
-        estado_normalizado = estado.capitalize()  # Normaliza el estado (Primera letra mayúscula)
-        if estado_normalizado not in ["Activa", "Inactiva"]:
+        estado_normalizado = estado.strip().lower()  # Normaliza el estado eliminando espacios y convirtiendo a minúsculas
+        if estado_normalizado == "activa":
+            return "ACTIVA"
+        elif estado_normalizado == "inactiva":
+            return "INACTIVA"
+        else:
             print("Estado no válido. Debe ser 'Activa' o 'Inactiva'.")
             return None
-        return estado_normalizado
 
     # Método para insertar una nueva materia con opción para suprimir el mensaje de inserción
     def insertar(self, codigo, nombre, estado, mostrar_mensaje=True):
@@ -25,7 +28,7 @@ class ListaEnlazada:
         if not estado_validado:
             return  # Si el estado no es válido, no continuar
 
-        nuevo_nodo = Nodo(codigo, nombre, estado_validado)  # Almacena el estado validado
+        nuevo_nodo = Nodo(codigo, nombre.upper(), estado_validado)  # Almacena el nombre en mayúsculas y el estado validado
         if self.cabeza is None:
             self.cabeza = nuevo_nodo
         else:
@@ -46,7 +49,7 @@ class ListaEnlazada:
                 if not estado_validado:
                     return  # Si el estado no es válido, no continuar
                 
-                actual.datos = f"{codigo}/{nuevo_nombre}/{estado_validado}"  # Modifica los datos
+                actual.datos = f"{codigo}/{nuevo_nombre.upper()}/{estado_validado}"  # Modifica y almacena el nombre en mayúsculas y estado validado
                 print(f"Materia con código {codigo} modificada.")
                 return
             actual = actual.siguiente
@@ -74,37 +77,32 @@ def menu():
     lista.insertar("LEN134", "LENGUAJE", "Activa", mostrar_mensaje=False)
 
     while True:
-        print("\n Sistema de Materias Unemi:")
-        print("Eliga una de las opciones proporcionadas")
-        print("1. Mostrar materias")
-        print("2. Insertar materia")
-        print("3. Modificar materia")
-        print("4. Consultar materias")
-        print("5. Salir")
+        print("\nSistema de Materias Unemi:")
+        print("Elija una de las opciones proporcionadas")
+        print("1. Insertar materia")
+        print("2. Modificar materia")
+        print("3. Consultar materias")
+        print("4. Salir")
         
         opcion = input("Seleccione una opción: ")
 
         if opcion == "1":
-            print("Materias inicializadas:")
-            lista.consultar()
-        
-        elif opcion == "2":
             codigo = input("Ingrese el código de la materia: ")
             nombre = input("Ingrese el nombre de la materia: ")
             estado = input("Ingrese el estado de la materia (Activa/Inactiva): ")
             lista.insertar(codigo, nombre, estado)
         
-        elif opcion == "3":
+        elif opcion == "2":
             codigo = input("Ingrese el código de la materia a modificar: ")
             nuevo_nombre = input("Ingrese el nuevo nombre de la materia: ")
             nuevo_estado = input("Ingrese el nuevo estado de la materia: ")
             lista.modificar(codigo, nuevo_nombre, nuevo_estado)
         
-        elif opcion == "4":
+        elif opcion == "3":
             print("Lista de materias:")
             lista.consultar()
         
-        elif opcion == "5":
+        elif opcion == "4":
             print("Saliendo del programa.")
             break
         
